@@ -1,6 +1,18 @@
 var tools = {
   
-  init: function() {
+  debug: true,
+
+  log: function(){
+    if(this.debug){
+      for(var i=0;i<arguments.length; i++){
+        console.log(arguments[i]);
+      }
+    }
+  },
+
+  init: function(debug) {
+
+  	this.debug = (debug) ? debug : false;
 
   	this.setup();
 
@@ -14,6 +26,9 @@ var tools = {
   
   setup: function() {
     
+    var [a, ,b] = [1,2,3];
+
+    this.log(a,b);
     
   },
   

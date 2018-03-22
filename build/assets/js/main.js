@@ -1,11 +1,40 @@
-$(function () {
+var tools = {
 
-   // Main JS
+  debug: true,
 
-});
+  log: function () {
+    if (this.debug) {
+      for (var i = 0; i < arguments.length; i++) {
+        console.log(arguments[i]);
+      }
+    }
+  },
 
-$(window).on('load resize', function () {
+  init: function (debug) {
 
-   // Scripts to be triggers on screen resize - Mostly for media queries
+    this.debug = debug ? debug : false;
 
+    this.setup();
+
+    this.events();
+  },
+
+  options: {},
+
+  setup: function () {
+
+    var [a,, b] = [1, 2, 3];
+
+    this.log(a, b);
+  },
+
+  events: function () {}
+
+};
+
+window.tools = tools;
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  tools.init(true);
 });
