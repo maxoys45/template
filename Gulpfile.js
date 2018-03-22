@@ -7,7 +7,8 @@ var gulp = require('gulp'),
     imagemin = require('gulp-imagemin'),
     pngquant = require('imagemin-pngquant'),
     jsmin = require('gulp-jsmin'),
-    rename = require('gulp-rename');
+    rename = require('gulp-rename'),
+    babel = require("gulp-babel");
 
 
 var settings = {
@@ -19,6 +20,7 @@ var settings = {
 
 gulp.task('minify-js', function () {
     gulp.src(settings.srcFolder + 'js/*.js')
+        .pipe(babel())
         .pipe(jsmin())
         .pipe(rename({
             suffix: '.min'
@@ -64,6 +66,7 @@ gulp.task('copy-img', function () {
 
 gulp.task('copy-js', function () {
     gulp.src(settings.srcFolder + 'js/*.js')
+        .pipe(babel())
         .pipe(gulp.dest(settings.assetsFolder + 'js/'))
 
 });

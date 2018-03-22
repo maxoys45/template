@@ -20,7 +20,7 @@ function switchContent(elementToCut, whereToMoveIt, beforeOrAfter, atWhatSize) {
         whereTo: $("." + whereToMoveIt),
         beforeAfter: beforeOrAfter,
         size: atWhatSize
-    }
+    };
 
     var $originalLocation, $previousExists;
 
@@ -31,12 +31,10 @@ function switchContent(elementToCut, whereToMoveIt, beforeOrAfter, atWhatSize) {
 
         $previousExists = true;
         $originalLocation = $params.elementCut.prev();
-
     } else {
 
         $previousExists = false;
         $originalLocation = $params.elementCut.parent();
-
     }
 
     var $switch = false;
@@ -49,36 +47,27 @@ function switchContent(elementToCut, whereToMoveIt, beforeOrAfter, atWhatSize) {
 
             if (!$switch) {
 
-                if($params.beforeAfter == 'before') {
+                if ($params.beforeAfter == 'before') {
 
                     $params.elementCut.detach().insertBefore($params.whereTo);
-
-                } else if($params.beforeAfter == 'after') {
+                } else if ($params.beforeAfter == 'after') {
 
                     $params.elementCut.detach().insertAfter($params.whereTo);
-
                 }
 
                 $switch = true;
-
             }
-
         } else {
 
             if ($previousExists) {
 
                 $params.elementCut.detach().insertAfter($originalLocation);
-
             } else {
 
                 $params.elementCut.detach().prependTo($originalLocation);
-
             }
 
             $switch = false;
-
         }
-
     });
-
 }
