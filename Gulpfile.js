@@ -41,7 +41,6 @@ gulp.task('minify-img', function () {
         .pipe(gulp.dest(settings.assetsFolder + 'img/'));
 });
 
-
 gulp.task('compile-sass', function () {
     gulp.src([settings.srcFolder + 'sass/*'])
         .pipe(sourcemaps.init())
@@ -56,6 +55,11 @@ gulp.task('compile-sass', function () {
             suffix: '.min'
         }))
         .pipe(gulp.dest(settings.assetsFolder + 'css/'));
+});
+
+gulp.task('copy-img', function () {
+    return gulp.src(settings.srcFolder + 'img/**/*')
+        .pipe(gulp.dest(settings.assetsFolder + 'img/'));
 });
 
 gulp.task('copy-js', function () {
@@ -83,15 +87,26 @@ gulp.task('file-include', function () {
 
 // UNCOMMENT MINIFY JS WHEN PRODUCTION READY
 
-gulp.task('default', ['file-include', 'compile-sass', /*'minify-js',*/ 'minify-img', 'copy-js', 'copy-fonts'], function () {
+gulp.task('default', [
+    'file-include',
+    'compile-sass',
+    'copy-img',
+    'copy-js',
+    'copy-fonts'
+]);
+
+gulp.task('watch', ['default'], function() {
 
     gulp.watch(settings.layoutFolder + '/**/*.html', ['file-include']);
-    gulp.watch(settings.srcFolder + 'img/**/*', ['minify-img']);
+    gulp.watch(settings.srcFolder + 'img/**/*', ['copy-img']);
     gulp.watch(settings.srcFolder + 'sass/**/*', ['compile-sass']);
-    // gulp.watch(settings.srcFolder + 'js/*', ['minify-js']);
     gulp.watch(settings.srcFolder + 'js/*', ['copy-js']);
     gulp.watch(settings.srcFolder + 'fonts/**/*', ['copy-fonts']);
 
 });
 
-// COMMENTED OUT BROWSER SYNC TO SEE IF IT FIXES HOME COMP
+gulp.task('build', [
+    'default',
+    'minify-js',
+    'minify-img'
+]);
