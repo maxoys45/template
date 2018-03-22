@@ -17,18 +17,22 @@ var tools = {
     this.setup();
 
     this.events();
+
+    this.drag();
   },
 
   options: {},
 
-  setup: function () {
+  setup: function () {},
 
-    var [a,, b] = [1, 2, 3];
+  events: function () {},
 
-    this.log(a, b);
-  },
+  drag: function () {
 
-  events: function () {}
+    new Draggable.Draggable(document.querySelectorAll('.mainNav__list'), {
+      draggable: 'li'
+    }).on('drag:start', () => console.log('drag:start')).on('drag:move', () => console.log('drag:move')).on('drag:stop', () => console.log('drag:stop'));
+  }
 
 };
 
