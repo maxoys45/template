@@ -1,11 +1,33 @@
-$(function() {
+var tools = {
+  
+  init: function() {
 
-    // Main JS
+  	this.setup();
 
-});
+  	this.events();
 
-$(window).on('load resize', function(){
+  },
+  
+  options: {
+   
+  },
+  
+  setup: function() {
+    
+    
+  },
+  
+  events: function() {
+    
+    
+  }
+  
+}
 
-   // Scripts to be triggers on screen resize - Mostly for media queries
+window.tools = tools;
 
+document.addEventListener('DOMContentLoaded', function() {
+  
+  tools.init(true);
+  
 });
